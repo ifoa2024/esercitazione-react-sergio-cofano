@@ -1,25 +1,37 @@
 // src/App.js
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import ChiSiamo from './ChiSiamo';
-import Registrazione from './Registrazione';
-import HomePage from './Homepage';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
+import HomePage from './pages/Homepage';
+import ChiSiamo from './pages/ChiSiamo';
+import Login from './pages/Login';
+import Navbar from './components/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from './Navbar'; 
+
 const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true); // Segna come loggato
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false); // Segna come non loggato
+  };
+
   return (
     <Router>
-      
-      <Navbar /> {/* Aggiungi la navbar sopra il contenuto */}
-      
-      <div className="container mt-4"> {/* Aggiungi un po' di margine al contenuto */}
+      <Navbar onLogout={handleLogout} isLoggedIn={isLoggedIn} />
+
+      <div className="container mt-4">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/chi-siamo" element={<ChiSiamo />} />
-          <Route path="/registrazione" element={<Registrazione />} />
+          <Route
+            path="/chi-siamo"
+            element={isLoggedIn ? <ChiSiamo /> : <Navigate to="/login" />}
+          />
+          <Route path="/login" element={<Login onLogin={handleLogin} />} />
         </Routes>
       </div>
-    
     </Router>
   );
 };

@@ -1,33 +1,45 @@
 /* src/App.css */
 
-/* Navbar personalizzata */
+/* Rimuovi margini e padding per body e html */
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar fissa in alto */
 .navbar {
   background-color: #343a40; /* Colore scuro per la navbar */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* La navbar deve occupare tutta la larghezza */
+  z-index: 1000; /* Assicurati che sia sopra gli altri elementi */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Aggiungi una leggera ombra */
 }
 
-.navbar .navbar-brand, .navbar .nav-link {
-  color: #f8f9fa !important; /* Colore chiaro per il testo */
-}
-
-.navbar .nav-link:hover {
-  color: #adb5bd !important; /* Colore hover per i link */
-}
-
-/* Layout principale */
+/* Aggiungi uno spazio sufficiente per la navbar nella sezione del contenuto */
 .container {
-  max-width: 800px; /* Limitiamo la larghezza del contenuto per migliorare la leggibilità */
-  margin-top: 30px;
-  margin-bottom: 30px;
+  padding-top: 80px; /* Spazio per la navbar fissa */
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0 auto;
+  height: calc(100vh - 80px); /* Imposta l'altezza per evitare che il contenuto vada sotto la navbar */
+  overflow-y: auto; /* Aggiungi scroll verticale se necessario */
 }
 
-/* Aggiungi spaziatura sopra e sotto per i titoli */
+/* La navbar deve essere allineata correttamente */
+.navbar-nav {
+  margin-left: auto;
+}
+
+/* Assicurati che il contenuto della pagina abbia margini corretti e non vada oltre */
 h1 {
   font-size: 2.5rem;
-  margin-bottom: 20px;
-  color: #495057; /* Colore del testo */
+  color: #495057;
 }
 
-/* Stilizzazione dei moduli */
+/* Form per la pagina di login */
 form {
   background-color: #f8f9fa; /* Sfondo chiaro per i form */
   padding: 30px;
@@ -36,29 +48,35 @@ form {
 }
 
 form .form-control {
-  border-radius: 4px; /* Angoli arrotondati per i campi di input */
-  box-shadow: none; /* Rimuoviamo la bordatura predefinita */
+  border-radius: 4px;
 }
 
 form button {
   width: 100%; /* Button largo tutta la larghezza del form */
-  background-color: #007bff; /* Colore primario di Bootstrap */
+  background-color: #007bff;
   border: none;
   color: white;
   font-size: 1.1rem;
   padding: 10px;
   border-radius: 4px;
-  transition: background-color 0.3s ease;
 }
 
 form button:hover {
-  background-color: #0056b3; /* Colore al passaggio del mouse */
+  background-color: #0056b3;
 }
 
-/* Footer (opzionale) */
-footer {
-  text-align: center;
-  padding: 20px 0;
-  background-color: #343a40;
-  color: #f8f9fa;
+/* Responsività: Assicurati che il layout sia responsive */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  form {
+    padding: 20px;
+  }
 }
